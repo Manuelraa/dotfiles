@@ -5,31 +5,38 @@ if [[ ! $REPLY =~ ^[Yy]$ ]]
 then
     [[ "$0" = "$BASH_SOURCE" ]] && exit 1 || return 1 # handle exits from shell or function but don't exit interactive shell
 fi
+echo ""
 
-
+echo ">>>>>>> Starting install in 5 seconds..."
+echo ">>>>>>> Last chance to cancel and look at the script..."
+sleep 5
 INSTALL_DIR=$HOME
-echo "Installing depends using APT"
-sudo apt-get install python3 python3-dev python python-dev i3 git wget curl pylint3 python3-venv fonts-powerline zsh neovim ranger sudo pacman -S --needed python python2 neovim i3 git wget curl pylint3 python-venv fonts-powerline zsh ranger
-echo "Installing depends using PACMAN"
+echo ">>>>>>> Installing depends using APT"
+sudo apt install python3 python3-dev fonts-powerline zsh neovim ranger 
 
-echo "Installing NEOVIM python modules"
-python3 -m pip install --user neovim
-python -m pip install --user neovim
+echo ">>>>>>> Other stuff I use"
+sudo apt install i3 git wget curl httpie python3-venv flameshot
 
-echo "Copy dotfiles to $INSTALL_DIR"
+echo ">>>>>>> Installing python modules I use"
+pip3 install --user -U pip setuptools wheel
+pip3 install --user -U neovim pipenv
+
+echo ">>>>>>> Copy dotfiles to $INSTALL_DIR"
 rsync -av ./ $INSTALL_DIR --exclude ".git" --exclude "setup.sh" --exclude "README.md"
 
-echo "Installing neovim plugin: vim-plug"
-curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-echo "=============================="
-echo "Now open neovim using 'nvim' and type ':PlugInstall' to complete neovim installation"
-echo "then go to '$INSTALL_DIR/.vim/plugged/YouCompleteMe' and run 'python3 setup.py'"
-echo "=============================="
+echo "BELLOW FOLLOWS ADDITIONAL INFO ABOUT MY DOTFILES"
+echo "======== Shell stuff ========"
+echo "I recommend to install oh_my_zsh and make zsh your default shell"
+echo "When installing oh_my_zsh it will copy your aka. my .zshrc config to .zshrc.before_oh_my_zsh"
+echo "Copy it back to .zshrc to get my oh_my_zsh configuration"
+echo ""
+echo "======== Terminatl emulator stuff ========"
+echo "Install 'termite terminal' because its great"
+echo "Design it with 'termite-style'"
+echo ""
+echo "======== Other info ========"
+echo "first time u start neovim it will install all plugins. Some might need additional setup. instructions printed bellow"
+echo ""
+echo "Vim python better completions setup:"
+echo "after that u have to close it. cd to '$HOME/.config/nvim/plugged/YouCompleteMe'. and run python3 install.py"
 
-echo "Installing oh-my-zsh"
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-mv $INSTALL_DIR/.zshrc.pre-oh-my-zsh $INSTALL_DIR/.zshrc
-
-
-echo "Installing tmux plugin manager"
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
