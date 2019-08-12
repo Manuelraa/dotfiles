@@ -130,7 +130,7 @@ bindkey -s '^O' 'ranger-cd\n'
 #                /usr/lib/command-not-found --no-failure-msg -- $1
 #        }
 #fi
-alias activate='. venv/bin/activate'
+alias activate='pipenv shell'
 alias glog='git log --all --decorate --oneline --graph'
 alias gd='git diff'
 alias gc='git checkout'
