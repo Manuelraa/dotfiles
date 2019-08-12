@@ -1,6 +1,6 @@
 #!/bin/bash
 
-read -p "This script will override all your config files! Backup them before you continue! Continue? [y/N]: " -n 1 -r
+read -p "This script will override all your config files! Backups will be created to .before_manuelraa_dotfiles Continue? [y/N]: " -n 1 -r
 if [[ ! $REPLY =~ ^[Yy]$ ]]
 then
     [[ "$0" = "$BASH_SOURCE" ]] && exit 1 || return 1 # handle exits from shell or function but don't exit interactive shell
@@ -9,6 +9,14 @@ echo ""
 
 echo ">>>>>>> Starting install in 5 seconds..."
 echo ">>>>>>> Last chance to cancel and look at the script..."
+
+echo ">>>>>>> copy all files which will be overriden to new file with ending .before_manuelraa_dotfiles"
+echo ">>>>>>> to delete the backups use \"find -name \"*.before_manuelraa_dotfiles\" -exec rm -rf {} \;\""
+for file in $(find . -type f -not -name 'setup.sh' -not -name 'README.md' -not -path '*.git*'); do
+    echo "COPY \"$HOME/$file\" TO \"$HOME/$file.before_manuelraa_dotfiles\""
+    cp "$HOME/$file" "$HOME/$file.before_manuelraa_dotfiles"
+done
+
 sleep 5
 INSTALL_DIR=$HOME
 echo ">>>>>>> Installing depends using APT"
