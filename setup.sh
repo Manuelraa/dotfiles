@@ -19,8 +19,8 @@ done
 
 sleep 5
 INSTALL_DIR=$HOME
-echo ">>>>>>> Installing depends using APT"
-sudo apt install python3 python3-dev fonts-powerline zsh neovim ranger 
+echo ">>>>>>> Installing dependencies using APT"
+sudo apt install python3 python3-dev fonts-powerline zsh neovim ranger volumeicon-alsa
 
 echo ">>>>>>> Other stuff I use"
 sudo apt install i3 git wget curl httpie python3-venv flameshot
