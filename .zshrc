@@ -147,6 +147,11 @@ alias vctmux='nvim $HOME/.tmux.conf'
 alias vcnvim='nvim $HOME/.config/nvim/init.vim'
 fpath=(~/.zsh.d/ $fpath)
 
+# Tool completions / aliases
+eval $(thefuck --alias)
+complete -W "$(tldr 2>/dev/null --list)" tldr
+source ~/.commacd.sh
+
 # Mistral host
 #export OS_MISTRAL_URL=http://<Mistral host>:8989/v2
 

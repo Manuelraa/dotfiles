@@ -29,6 +29,20 @@ echo ">>>>>>> Installing python modules I use"
 pip3 install --user -U pip setuptools wheel
 pip3 install --user -U neovim pipenv
 
+echo ">>>>>>> Installing tools I use"
+# FUCK
+pip3 install --user -U thefuck
+
+# tldr
+echo "tldr -- easy man pages broken down to the important stuff"
+mkdir -p ~/bin
+curl -o ~/bin/tldr https://raw.githubusercontent.com/raylee/tldr/master/tldr
+chmod +x ~/bin/tldr
+
+# commacd
+echo "Faster then cd....  -> https://github.com/shyiko/commacd"
+curl -sSL https://raw.githubusercontent.com/shyiko/commacd/master/commacd.sh -o ~/.commacd.sh
+
 echo ">>>>>>> Copy dotfiles to $INSTALL_DIR"
 rsync -av ./ $INSTALL_DIR --exclude ".git" --exclude "setup.sh" --exclude "README.md"
 
