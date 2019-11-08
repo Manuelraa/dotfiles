@@ -27,7 +27,7 @@ sudo apt install i3 git wget curl httpie python3-venv flameshot
 
 echo ">>>>>>> Installing python modules I use"
 pip3 install --user -U pip setuptools wheel
-pip3 install --user -U neovim pipenv
+pip3 install --user -U neovim pipenv flake8
 
 echo ">>>>>>> Installing tools I use"
 # FUCK
