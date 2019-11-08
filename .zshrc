@@ -148,7 +148,6 @@ alias vcnvim='nvim $HOME/.config/nvim/init.vim'
 fpath=(~/.zsh.d/ $fpath)
 
 # Tool completions / aliases
-eval $(thefuck --alias)
 complete -W "$(tldr 2>/dev/null --list)" tldr
 source ~/.commacd.sh
 
