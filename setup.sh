@@ -46,6 +46,9 @@ curl -sSL https://raw.githubusercontent.com/shyiko/commacd/master/commacd.sh -o 
 echo ">>>>>>> Copy dotfiles to $INSTALL_DIR"
 rsync -av ./ $INSTALL_DIR --exclude ".git" --exclude "setup.sh" --exclude "README.md"
 
+echo ">>>>>>> Installing TMUX plugin manager"
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
 echo "BELLOW FOLLOWS ADDITIONAL INFO ABOUT MY DOTFILES"
 echo "======== Shell stuff ========"
 echo "I recommend to install oh_my_zsh and make zsh your default shell"
