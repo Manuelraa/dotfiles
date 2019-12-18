@@ -20,7 +20,7 @@ done
 sleep 5
 INSTALL_DIR=$HOME
 echo ">>>>>>> Installing dependencies using APT"
-sudo apt install python3 python3-dev fonts-powerline zsh neovim ranger volumeicon-alsa
+sudo apt install python3 python3-dev fonts-powerline zsh neovim ranger volumeicon-alsa lxappearance dolphin
 
 echo ">>>>>>> Other stuff I use"
 sudo apt install i3 git wget curl httpie python3-venv flameshot
@@ -48,6 +48,9 @@ rsync -av ./ $INSTALL_DIR --exclude ".git" --exclude "setup.sh" --exclude "READM
 
 echo ">>>>>>> Installing TMUX plugin manager"
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
+echo ">>>>>>> Installing Icon Pack"
+wget -qO- https://git.io/papirus-icon-theme-install | sh
 
 echo "BELLOW FOLLOWS ADDITIONAL INFO ABOUT MY DOTFILES"
 echo "======== Shell stuff ========"

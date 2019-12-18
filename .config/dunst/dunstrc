@@ -186,9 +186,9 @@ per_monitor_dpi = false
 [shortcuts]
 close = ctrl+space
 close_all = ctrl+shift+space
-history = ctrl+grave
+history = ctrl+dead_circumflex
 # Context menu (to operate on notification)
-context = ctrl+shift+period
+context = mod1+dead_circumflex
 
 
 [urgency_low]
