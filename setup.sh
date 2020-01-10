@@ -20,19 +20,16 @@ done
 sleep 5
 INSTALL_DIR=$HOME
 echo ">>>>>>> Installing dependencies using APT"
-sudo apt install python3 python3-dev fonts-powerline zsh neovim ranger volumeicon-alsa lxappearance dolphin
+sudo apt install python3 python3-dev python3-venv python3-pip fonts-powerline zsh neovim ranger volumeicon-alsa lxappearance dolphin
 
 echo ">>>>>>> Other stuff I use"
-sudo apt install i3 git wget curl httpie python3-venv flameshot
+sudo apt install i3 git wget curl httpie python3-venv flameshot htop
 
 echo ">>>>>>> Installing python modules I use"
 pip3 install --user -U pip setuptools wheel
-pip3 install --user -U neovim pipenv flake8
+pip3 install --user -U neovim pynvim flake8
 
 echo ">>>>>>> Installing tools I use"
-# FUCK
-pip3 install --user -U thefuck
-
 # tldr
 echo "tldr -- easy man pages broken down to the important stuff"
 mkdir -p ~/bin
