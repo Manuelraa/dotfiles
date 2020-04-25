@@ -5,7 +5,7 @@
 "*****************************************************************************
 let vimplug_exists=expand('~/.config/nvim/autoload/plug.vim')
 
-let g:vim_bootstrap_langs = "html,javascript,python,typescript"
+let g:vim_bootstrap_langs = "html,javascript,python"
 let g:vim_bootstrap_editor = "nvim"				" nvim or vim
 
 if !filereadable(vimplug_exists)
@@ -90,9 +90,10 @@ Plug 'davidhalter/jedi-vim'
 Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
 
 
-" typescript
-Plug 'leafgarland/typescript-vim'
-Plug 'HerringtonDarkholme/yats.vim'
+" vuejs
+Plug 'posva/vim-vue'
+Plug 'leafOfTree/vim-vue-plugin'
+
 
 
 "*****************************************************************************
@@ -271,7 +272,7 @@ if !exists('*s:setupWrapping')
   function s:setupWrapping()
     set wrap
     set wm=2
-    set textwidth=99
+    set textwidth=79
   endfunction
 endif
 
@@ -453,7 +454,7 @@ augroup END
 " vim-python
 augroup vimrc-python
   autocmd!
-  autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=8 colorcolumn=99
+  autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=8 colorcolumn=79
       \ formatoptions+=croq softtabstop=4
       \ cinwords=if,elif,else,for,while,try,except,finally,def,class,with
 augroup END
@@ -482,9 +483,12 @@ let g:polyglot_disabled = ['python']
 let python_highlight_all = 1
 
 
-" typescript
-let g:yats_host_keyword = 1
 
+" vuejs
+" vim vue
+let g:vue_disable_pre_processors=1
+" vim vue plugin
+let g:vim_vue_plugin_load_full_syntax = 1
 
 
 "*****************************************************************************

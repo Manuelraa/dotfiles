@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:$HOME/.local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -148,10 +148,23 @@ alias vcnvim='nvim $HOME/.config/nvim/init.vim'
 fpath=(~/.zsh.d/ $fpath)
 
 # Tool completions / aliases
-complete -W "$(tldr 2>/dev/null --list)" tldr
 source ~/.commacd.sh
 
 # Mistral host
 #export OS_MISTRAL_URL=http://<Mistral host>:8989/v2
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export DISPLAY=:0.0
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
+#export PATH=/home/user/.pyenv/shims:/home/user/.pyenv/bin:/home/user/bin:/usr/local/bin:/home/user/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:
+export ANDROID_HOME=$HOME/Android/Sdk
+export JAVA_HOME=/opt/jdk8u242-b08
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+export PATH=$PATH:$ANDROID_HOME/tools/bin
+alias sdkmanager='sdkmanager --sdk_root=${ANDROID_HOME}'
+export PATH=$PATH:/mnt/c/Users/Manuel/AppData/Local/Android/Sdk/platform-tools
+alias adb="adb.exe"
