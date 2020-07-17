@@ -5,56 +5,63 @@ if [[ ! $REPLY =~ ^[Yy]$ ]]
 then
     [[ "$0" = "$BASH_SOURCE" ]] && exit 1 || return 1 # handle exits from shell or function but don't exit interactive shell
 fi
-echo ""
+printf ""
 
-echo ">>>>>>> Starting install in 5 seconds..."
-echo ">>>>>>> Last chance to cancel and look at the script..."
+printf ">>>>>>> Starting install in 5 seconds...\n"
+printf ">>>>>>> Last chance to cancel and look at the script...\n"
 sleep 5
 
-echo ">>>>>>> copy all files which will be overriden to new file with ending .before_manuelraa_dotfiles"
-echo ">>>>>>> to delete the backups use \"find -name \"*.before_manuelraa_dotfiles\" -exec rm -rf {} \;\""
+printf "\n>>>>>>> copy all files which will be overriden to new file with ending .before_manuelraa_dotfiles\n"
+printf ">>>>>>> to delete the backups use \"find -name \"*.before_manuelraa_dotfiles\" -exec rm -rf {} \;\"\n"
 for file in $(find . -type f -not -name 'setup.sh' -not -name 'README.md' -not -path '*.git*'); do
-    echo "COPY \"$HOME/$file\" TO \"$HOME/$file.before_manuelraa_dotfiles\""
-    cp "$HOME/$file" "$HOME/$file.before_manuelraa_dotfiles"
+    if test -f "$file"; then
+        printf "COPY \"$HOME/$file\" TO \"$HOME/$file.before_manuelraa_dotfiles\""
+        cp "$HOME/$file" "$HOME/$file.before_manuelraa_dotfiles"
+    fi
 done
 
 INSTALL_DIR=$HOME
-echo ">>>>>>> Installing dependencies using APT"
+printf "\n>>>>>>> Installing dependencies using APT\n"
 sudo apt install python3 python3-dev python3-venv python3-pip fonts-powerline zsh neovim ranger volumeicon-alsa ctags
 
-echo ">>>>>>> Other stuff I use"
-sudo apt install i3 git wget curl httpie python3-venv flameshot htop
+printf "\n>>>>>>> Other stuff I use\n"
+sudo apt install i3 git wget curl httpie flameshot htop
 
-echo ">>>>>>> Installing python modules I use"
-pip3 install --user -U pip setuptools wheel
-pip3 install --user -U neovim pynvim flake8
+printf "\n>>>>>>> Installing python modules I use\n"
+pip3 install --user -U pip setuptools wheel ipdb
 
-echo ">>>>>>> Installing tools I use"
+printf "\n>>>>>>> Installing tools I use\n"
 # tldr
-echo "tldr -- easy man pages broken down to the important stuff"
+printf "tldr -- easy man pages broken down to the important stuff\n"
 mkdir -p ~/bin
 curl -o ~/bin/tldr https://raw.githubusercontent.com/raylee/tldr/master/tldr
-chmod +x ~/bin/tldr
+chmod u+x ~/bin/tldr
 
 # commacd
-echo "Faster then cd....  -> https://github.com/shyiko/commacd"
+printf "Faster then cd....  -> https://github.com/shyiko/commacd\n"
 curl -sSL https://raw.githubusercontent.com/shyiko/commacd/master/commacd.sh -o ~/.commacd.sh
 
-echo ">>>>>>> Copy dotfiles to $INSTALL_DIR"
-rsync -av ./ $INSTALL_DIR --exclude ".git" --exclude "setup.sh" --exclude "README.md"
+printf "\n>>>>>>> Copy dotfiles to $INSTALL_DIR"
+rsync -av ./ $INSTALL_DIR --exclude ".git" --exclude "setup.sh" --exclude "README.md" --exclude "create_nvim_venv.sh"
 
-echo ">>>>>>> Installing TMUX plugin manager"
+printf "\n>>>>>>> Installing TMUX plugin manager\n"
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
-echo ">>>>>>> Installing Icon Pack"
+printf "\n>>>>>>> Installing NeoVim plugins\n"
+nvim +PlugInstall +q +q
+
+#printf ">>>>>>> Installing Icon Pack"
 #wget -qO- https://git.io/papirus-icon-theme-install | sh
 
-echo "BELLOW FOLLOWS ADDITIONAL INFO ABOUT MY DOTFILES"
-echo "======== Shell stuff ========"
-echo "I recommend to install oh_my_zsh and make zsh your default shell"
-echo "When installing oh_my_zsh it will move your (aka. my) .zshrc config to .zshrc.before_oh_my_zsh"
-echo "Move it back to .zshrc to get my oh_my_zsh configuration"
-echo ""
-echo "======== Other info ========"
-echo "first time u start neovim it will install all plugins.
+printf "\n>>>>>>> Installing OhMyZsh\n"
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+mv $INSTALL_DIR/.zshrc.pre_oh_my_zsh $INSTALL_DIR/.zshrc
 
+printf "\n>>>>>>> Installing pyenv\n"
+git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+git clone https://github.com/pyenv/pyenv-virtualenv.git $(pyenv root)/plugins/pyenv-virtualenv
+sudo apt-get install --no-install-recommends make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
+
+printf "\nRestart your shell/system now! Just to make sure ^^\n"
+printf "Then use the create_nvim_venv.sh script inside zsh\n"
+printf ">>>>>>> to delete the backups of your old configs use \"find -name \"*.before_manuelraa_dotfiles\" -exec rm -rf {} \;\"\n"
