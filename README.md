@@ -19,18 +19,15 @@ An awesome screenshot tool
 ### httpie
 A tool for REST Apis. Perfect for testing
 
+### pyenv
+Version management for python version
+
 ### pipenv
 Hate to have an .venv folder for every project? Pipenv is a venv manager which stores the venv outside the project
 and makes it easy to activate it from inside a project
 
 ### zsh
 Because bash simply is to simple. zsh offers better design, advanced completions and more
-
-### termite
-A slic terminal emulator I use. Kinda "hard" to install on Ubuntu. But give it a try
-
-### termite-style
-a simple tool to design your termite as u like it
 
 ### neovim
 the main advantage over vim is that it can copy into system clipboard. Helpfull to copy out of tmux. tmux copy mode is shit...
