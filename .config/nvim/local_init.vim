@@ -1,5 +1,6 @@
 set termguicolors
 set colorcolumn=100
+autocmd FileType python setlocal colorcolumn=100
 
 "Fromat json with "FormatJSON" cmd
 com! FormatJSON %!python -m json.tool
@@ -16,5 +17,4 @@ let g:python3_host_prog = "$HOME/.pyenv/versions/neovim3/bin/python"
     \'javascript': ['eslint']})
 
 let g:deoplete#enable_at_startup = 1
-"set omnifunc=ale#completion#OmniFunc
-"let g:ale_completion_enabled = 1
+set omnifunc=ale#completion#OmniFunc
