@@ -18,14 +18,14 @@ let pipenv_venv_path = system('pipenv --venv')
 " Remember, that 'pipenv --venv' only points to the root directory
 " of the virtual environment, so we have to append a full path to
 " the python executable.
-if v:shell_error == 0
-  let venv_path = substitute(pipenv_venv_path, '\n', '', '')
-  let g:python3_host_prog = venv_path . '/bin/python'
-else
-  let g:python3_host_prog = "$HOME/.pyenv/versions/neovim3/bin/python"
-endif
-"
-let g:python3_host_prog = "$HOME/.pyenv/versions/neovim3/bin/python"
+" if v:shell_error == 0
+"   let venv_path = substitute(pipenv_venv_path, '\n', '', '')
+"   let g:python3_host_prog = venv_path . '/bin/python'
+" else
+"   let g:python3_host_prog = "$HOME/.pyenv/versions/neovim3/bin/python"
+" endif
+" "
+" let g:python3_host_prog = "$HOME/.pyenv/versions/neovim3/bin/python"
 
 :call extend(g:ale_linters, {
     \'python': ['flake8'],

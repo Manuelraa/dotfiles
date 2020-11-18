@@ -1,21 +1,28 @@
-" vim-bootstrap 
+" vim-bootstrap 2020-11-18 15:47:52
 
 "*****************************************************************************
-"" Vim-PLug core
+"" Vim-Plug core
 "*****************************************************************************
 let vimplug_exists=expand('~/.config/nvim/autoload/plug.vim')
+if has('win32')&&!has('win64')
+  let curl_exists=expand('C:\Windows\Sysnative\curl.exe')
+else
+  let curl_exists=expand('curl')
+endif
 
 let g:vim_bootstrap_langs = "html,javascript,python"
 let g:vim_bootstrap_editor = "nvim"				" nvim or vim
+let g:vim_bootstrap_theme = "molokai"
+let g:vim_bootstrap_frams = "vuejs"
 
 if !filereadable(vimplug_exists)
-  if !executable("curl")
+  if !executable(curl_exists)
     echoerr "You have to install curl or first install vim-plug yourself!"
     execute "q!"
   endif
   echo "Installing Vim-Plug..."
   echo ""
-  silent exec "!\curl -fLo " . vimplug_exists . " --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+  silent exec "!"curl_exists" -fLo " . shellescape(vimplug_exists) . " --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
   let g:not_finish_vimplug = "yes"
 
   autocmd VimEnter * PlugInstall
@@ -38,11 +45,12 @@ Plug 'vim-scripts/grep.vim'
 Plug 'vim-scripts/CSApprox'
 Plug 'Raimondi/delimitMate'
 Plug 'majutsushi/tagbar'
-Plug 'w0rp/ale'
+Plug 'dense-analysis/ale'
 Plug 'Yggdroot/indentLine'
-Plug 'avelino/vim-bootstrap-updater'
-Plug 'sheerun/vim-polyglot'
+Plug 'editor-bootstrap/vim-bootstrap-updater'
 Plug 'tpope/vim-rhubarb' " required by fugitive to :Gbrowse
+Plug 'tomasr/molokai'
+
 
 if isdirectory('/usr/local/opt/fzf')
   Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
@@ -64,9 +72,6 @@ Plug 'xolox/vim-session'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
-"" Color
-Plug 'tomasr/molokai'
-
 "*****************************************************************************
 "" Custom bundles
 "*****************************************************************************
@@ -74,7 +79,7 @@ Plug 'tomasr/molokai'
 " html
 "" HTML Bundle
 Plug 'hail2u/vim-css3-syntax'
-Plug 'gorodinskiy/vim-coloresque'
+Plug 'gko/vim-coloresque'
 Plug 'tpope/vim-haml'
 Plug 'mattn/emmet-vim'
 
@@ -162,7 +167,8 @@ set ruler
 set number
 
 let no_buffers_menu=1
-silent! colorscheme molokai
+colorscheme molokai
+
 
 set mousemodel=popup
 set t_Co=256
@@ -190,7 +196,10 @@ endif
 
 "" Disable the blinking cursor.
 set gcr=a:blinkon0
-set scrolloff=3
+
+au TermEnter * setlocal scrolloff=0
+au TermLeave * setlocal scrolloff=3
+
 
 "" Status bar
 set laststatus=2
@@ -478,8 +487,6 @@ let g:jedi#smart_auto_mappings = 0
 let g:airline#extensions#virtualenv#enabled = 1
 
 " Syntax highlight
-" Default highlight is better than polyglot
-let g:polyglot_disabled = ['python']
 let python_highlight_all = 1
 
 

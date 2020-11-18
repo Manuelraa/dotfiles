@@ -29,7 +29,7 @@ printf "\n>>>>>>> Other stuff I use\n"
 sudo apt install git wget curl httpie flameshot htop
 
 printf "\n>>>>>>> Installing python modules I use\n"
-pip3 install --user -U pip setuptools wheel ipdb
+pip3 install --user -U pip setuptools wheel ipdb pynvim
 
 printf "\n>>>>>>> Installing tools I use\n"
 # tldr
