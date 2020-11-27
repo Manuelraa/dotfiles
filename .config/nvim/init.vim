@@ -1,4 +1,4 @@
-" vim-bootstrap 2020-11-18 15:47:52
+" vim-bootstrap 2020-11-27 19:02:20
 
 "*****************************************************************************
 "" Vim-Plug core
@@ -10,7 +10,7 @@ else
   let curl_exists=expand('curl')
 endif
 
-let g:vim_bootstrap_langs = "html,javascript,python"
+let g:vim_bootstrap_langs = "html,javascript,python,typescript"
 let g:vim_bootstrap_editor = "nvim"				" nvim or vim
 let g:vim_bootstrap_theme = "molokai"
 let g:vim_bootstrap_frams = "vuejs"
@@ -93,6 +93,11 @@ Plug 'jelera/vim-javascript-syntax'
 "" Python Bundle
 Plug 'davidhalter/jedi-vim'
 Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
+
+
+" typescript
+Plug 'leafgarland/typescript-vim'
+Plug 'HerringtonDarkholme/yats.vim'
 
 
 " vuejs
@@ -488,6 +493,10 @@ let g:airline#extensions#virtualenv#enabled = 1
 
 " Syntax highlight
 let python_highlight_all = 1
+
+
+" typescript
+let g:yats_host_keyword = 1
 
 
 
