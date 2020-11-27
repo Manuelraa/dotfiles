@@ -20,18 +20,18 @@ let pipenv_venv_path = system('pipenv --venv')
 " the python executable.
 if v:shell_error == 0
   let venv_path = substitute(pipenv_venv_path, '\n', '', '')
-  let g:python3_host_prog = venv_path . '/bin/python'
+  "let g:python3_host_prog = venv_path . '/bin/python'
 else
-  let g:python3_host_prog = "$HOME/.pyenv/versions/neovim3/bin/python"
+  "let g:python3_host_prog = "$HOME/.pyenv/versions/neovim3/bin/python"
 endif
 "
-let g:python3_host_prog = "$HOME/.pyenv/versions/neovim3/bin/python"
+"let g:python3_host_prog = "$HOME/.pyenv/versions/neovim3/bin/python"
 
-:call extend(g:ale_linters, {
-    \'python': ['flake8'],
-    \'javascript': ['eslint']})
-
-let g:deoplete#enable_at_startup = 1
-set omnifunc=ale#completion#OmniFunc
-
-let g:polyglot_disabled = []
+"":call extend(g:ale_linters, {
+""    \'python': ['flake8'],
+""    \'javascript': ['eslint']})
+""
+""let g:deoplete#enable_at_startup = 1
+""set omnifunc=ale#completion#OmniFunc
+""
+""let g:polyglot_disabled = []

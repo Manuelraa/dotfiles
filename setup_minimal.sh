@@ -38,7 +38,8 @@ curl -L https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage
 chmod u+x $HOME/bin/nvim_pre
 
 printf "\n>>>>>>> Installing NeoVim plugins\n"
-$HOME/bin/nvim_pre +PlugInstall +q +q
+nvim +PlugInstall +q +q
+nvim +CocInstall coc-python coc-vetur coc-yaml coc-tsserver coc-json coc-html +q
 
 printf "\nRestart your shell/system now! Just to make sure ^^\n"
 printf "TODO: change python3 intepreter for nvim and install pynvim module\n"
