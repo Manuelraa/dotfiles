@@ -1,12 +1,12 @@
 #!/bin/bash
-set -x -e
+set -e
 
 read -p "This script will override all your config files! Backups will be created to .before_manuelraa_dotfiles Continue? [y/N]: " -n 1 -r
 if [[ ! $REPLY =~ ^[Yy]$ ]]
 then
     [[ "$0" = "$BASH_SOURCE" ]] && exit 1 || return 1 # handle exits from shell or function but don't exit interactive shell
 fi
-printf ""
+printf "\n"
 
 printf ">>>>>>> Starting install in 5 seconds...\n"
 printf ">>>>>>> Last chance to cancel and look at the script...\n"
@@ -16,7 +16,7 @@ printf "\n>>>>>>> copy all files which will be overriden to new file with ending
 printf ">>>>>>> to delete the backups use \"find -name \"*.before_manuelraa_dotfiles\" -exec rm -rf {} \;\"\n"
 for file in $(find . -type f -not -name 'setup.sh' -not -name 'setup_minimal.sh' -not -name 'README.md' -not -path '*.git*'); do
     if test -f "$file"; then
-        printf "COPY \"$HOME/$file\" TO \"$HOME/$file.before_manuelraa_dotfiles\""
+        printf "COPY \"$HOME/$file\" TO \"$HOME/$file.before_manuelraa_dotfiles\"\n"
         cp "$HOME/$file" "$HOME/$file.before_manuelraa_dotfiles" || true
     fi
 done
@@ -37,9 +37,12 @@ mkdir $HOME/bin || true
 curl -L https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage -o $HOME/bin/nvim_pre
 chmod u+x $HOME/bin/nvim_pre
 
+printf "\n>>>>>>> Installing node lts for NeoVim coc.nvim plugin"
+curl -sL install-node.now.sh/lts | sudo bash
+
 printf "\n>>>>>>> Installing NeoVim plugins\n"
-nvim +PlugInstall +q +q
-nvim +CocInstall coc-python coc-vetur coc-yaml coc-tsserver coc-json coc-html +q
+$HOME/bin/nvim_pre +PlugInstall +q +q
+$HOME/bin/nvim_pre "+CocInstall coc-python coc-vetur coc-yaml coc-tsserver coc-json coc-html"
 
 printf "\nRestart your shell/system now! Just to make sure ^^\n"
 printf "TODO: change python3 intepreter for nvim and install pynvim module\n"
